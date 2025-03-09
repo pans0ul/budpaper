@@ -1,0 +1,1 @@
+<view class="btn-list"><button type="primary" bindtap="{{a}}">新增一条数据</button></view><view class="container"><image src="{{b}}" class="image" bindtap="{{c}}" mode="scaleToFill" style="width:100%;height:100%"></image></view>

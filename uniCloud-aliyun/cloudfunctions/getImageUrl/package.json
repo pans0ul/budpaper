@@ -1,0 +1,7 @@
+{
+  "name": "getImageUrl",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}
