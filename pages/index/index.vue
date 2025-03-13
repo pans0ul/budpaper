@@ -1,7 +1,14 @@
+// 使用 uni-app 进行开发
+<!-- 先做前端页面 -->
 <template>
   <view class="container">
-    <button @click="getImage">获取图片</button>
-    <image :src="imageUrl" v-if="imageUrl" mode="aspectFit"></image>
+    <image :src="currentImage" class="image" @tap="toggleImage"
+	    mode="scaleToFill"
+	    style="width: 100%; height: 100%;"	></image>
+	<view class="time">
+		<uni-dateformat :date="new Date()" format="hh:mm"></uni-dateformat>
+	</view>
+		<view class="text">信息a1232131232</view>
   </view>
 </template>
 
@@ -9,40 +16,41 @@
 export default {
   data() {
     return {
-      imageUrl: ''
+      originalImage: '/static/original.jpg', // 第一张图片
+      clickedImage: '/static/clicked.jpg', // 第二张图片
+      currentImage: '/static/original.jpg' // 初始图片
     };
   },
   methods: {
-    async getImage() {
-      try {
-        // 替换为你实际的文件 ID
-        const fileID = '4b77cb91-e20c-4491-9db9-49530b603ac6'; 
-        const res = await uniCloud.callFunction({
-          name: 'getImageUrl',
-          data: {
-            fileID
-          }
-        });
-
-        if (res.result.code === 0) {
-          this.imageUrl = res.result.imageUrl;
-        } else {
-          console.error('获取图片失败', res.result.msg);
-        }
-      } catch (error) {
-        console.error('请求云函数失败', error);
-      }
+    toggleImage() {
+      this.currentImage = this.currentImage === this.originalImage ? this.clickedImage : this.originalImage;
     }
   }
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
+  background-color: black;
+}
+.image {
+  width: 80%;
+  height: auto;
+  max-width: 500px;
+}
+.time{			
+	font-size: 140rpx;
+	top:calc(10vh + 80rpx);		
+	font-weight: 100;
+	line-height: 1em;
+	text-shadow: 0 4rpx rgba(0, 0, 0, 0.3);
+}
+.text{
+	color: white;
+	font-size: 20rpx
 }
 </style>
