@@ -5,12 +5,38 @@
     <image :src="currentImage" class="image" @tap="toggleImage"
 	    mode="scaleToFill"
 	    style="width: 100%; height: 100%;"	></image>
+<!-- 	<view class="miniTime">
+		<uni-dateformat :date="new Date()" format="hh:mm"></uni-dateformat>
+		</view> -->
 	<view class="time">
 		<uni-dateformat :date="new Date()" format="hh:mm"></uni-dateformat>
 	</view>
-		<view class="text">信息a1232131232</view>
+	<view class="date">
+		<uni-dateformat :date="new Date()" format="M月dd日"></uni-dateformat>
+	</view>
+	<text class="dayOfWeek">{{dayOfWeek}}</text>
+	<!-- camera-icon -->
+	<uni-icons class="icon-camera" type="camera-filled" size="25" color="white"></uni-icons>
+	<uni-icons class="plate-right" type="smallcircle-filled" size="60" color="white"></uni-icons>
+	<!-- camera-icon -->
+	<!-- light-icon -->
+	<uni-icons class="icon-light" type="camera-filled" size="25" color="white"></uni-icons>
+	<uni-icons class="plate-left" type="smallcircle-filled" size="60" color="white"></uni-icons>
+	<!-- camera-icon -->
   </view>
 </template>
+
+<script setup>
+	import { ref } from 'vue';
+	
+	const EDayOfWeek = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+	// const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+	const curDate = new Date();
+	const dayOfWeek = EDayOfWeek[curDate.getDay()];
+	console.log(dayOfWeek); 
+
+	
+</script>
 
 <script>
 export default {
@@ -41,16 +67,89 @@ export default {
   width: 80%;
   height: auto;
   max-width: 500px;
+  
 }
-.time{			
-	font-size: 140rpx;
-	top:calc(10vh + 80rpx);		
+// .miniTime{		
+// 	position: absolute;  //TODO: relative to image
+// 	color: #ffffff;
+// 	font-size: 30rpx;
+// 	top: 22px;
+// 	left: 22px;
+// 	font-weight: bold;
+// 	line-height: 1em;
+// 	// text-shadow: 0 4rpx rgba(0, 0, 0, 0.3);
+// }
+.time{
+	position: absolute; //TODO: relative to image
+	color: #ffffff;
+	display: grid;
+	place-items: center;
+	font-size: 150rpx;
+	top:12.2vh;
 	font-weight: 100;
 	line-height: 1em;
 	text-shadow: 0 4rpx rgba(0, 0, 0, 0.3);
+	
+}
+.date{
+	position: absolute; //TODO: relative to image
+	color: #ffffff;
+	display: grid;
+	place-items: center;
+	font-size: 42rpx;  
+	top: 21.5vh;
+	text-shadow: 0 2rpx rgba(0, 0, 0, 0.3);
+	right: 46+1.8vw
+}
+.dayOfWeek{
+	position: absolute;
+	color: #ffffff;
+	display: grid;
+	place-items: center;
+	font-size: 42rpx;
+	top: 21.5vh;
+	right: 28+1.8vw;	
+}
+.icon-camera{
+	position: absolute;
+	display: grid;
+	place-items: center;
+	bottom: 15.8vh;
+	right: 14.8vw;
+}
+.plate-right{
+	position: absolute;
+	display: grid;
+	place-items: center;
+	opacity: 60%;
+	bottom: 13.5vh; //Viewport Height
+	right: 10vw;	//Viewport Width
+
+}
+.icon-light{
+	position: absolute;
+	display: grid;
+	place-items: center;
+	bottom: 15.8vh;
+	left: 16.4vw;
+
+}
+.plate-left{
+	position: absolute;
+	display: grid;
+	place-items: center;
+	opacity: 60%;
+	bottom: 13.5vh; //Viewport Height
+	left: 11.8vw;	//Viewport Width
+
 }
 .text{
+	position: absolute;
 	color: white;
-	font-size: 20rpx
+	font-size: 20rpx;
+	top: 100px;
+	left: 100px;
+	
 }
 </style>
+
