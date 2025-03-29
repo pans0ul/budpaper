@@ -22,7 +22,7 @@
 	<!-- light-icon -->
 	<uni-icons class="icon-light" type="camera-filled" size="25" color="white"></uni-icons>
 	<uni-icons class="plate-left" type="smallcircle-filled" size="60" color="white"></uni-icons>
-	<!-- camera-icon -->
+	<!-- light-icon -->
   </view>
 </template>
 
@@ -84,12 +84,11 @@ export default {
 	color: #ffffff;
 	display: grid;
 	place-items: center;
-	font-size: 150rpx;
-	top:12.2vh;
-	font-weight: 100;
+	font-size: 160rpx;
+	top:11.8vh;
+	font-weight: 360;
 	line-height: 1em;
 	text-shadow: 0 4rpx rgba(0, 0, 0, 0.3);
-	
 }
 .date{
 	position: absolute; //TODO: relative to image
@@ -121,7 +120,7 @@ export default {
 	position: absolute;
 	display: grid;
 	place-items: center;
-	opacity: 60%;
+	opacity: 0.5;
 	bottom: 13.5vh; //Viewport Height
 	right: 10vw;	//Viewport Width
 
@@ -138,7 +137,7 @@ export default {
 	position: absolute;
 	display: grid;
 	place-items: center;
-	opacity: 60%;
+	opacity: 0.5;
 	bottom: 13.5vh; //Viewport Height
 	left: 11.8vw;	//Viewport Width
 
