@@ -2,12 +2,15 @@
 <!-- 先做前端页面 -->
 <template>
   <view class="container">
-    <image :src="currentImage" class="image" @tap="toggleImage"
-	    mode="scaleToFill"
-	    style="width: 100%; height: 100%;"	></image>
+	<swiper circular >
+		<swiper-item v-for="item in 5">
+			<image @tap="toggleImage" :src="currentImage" mode="aspectFill" ></image>
+		</swiper-item>
+	</swiper>
 <!-- 	<view class="miniTime">
 		<uni-dateformat :date="new Date()" format="hh:mm"></uni-dateformat>
 		</view> -->
+
 	<view class="time">
 		<uni-dateformat :date="new Date()" format="hh:mm"></uni-dateformat>
 	</view>
@@ -62,12 +65,14 @@ export default {
   align-items: center;
   height: 100vh;
   background-color: black;
-}
-.image {
-  width: 80%;
-  height: auto;
-  max-width: 500px;
-  
+  swiper{
+  	width: 100%;
+  	height: 100%;
+	image{
+		width: 100%;
+		height: 100%;
+		}
+	}
 }
 // .miniTime{		
 // 	position: absolute;  //TODO: relative to image
