@@ -1,6 +1,4 @@
 // 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
-// 数据库与云存贮的图片壁纸关联。
-// schema 为json数据结构，是表格的格式。
 {
 	"bsonType": "object",
 	"required": [],
@@ -15,13 +13,20 @@
 			"description": "ID，系统自动生成"
 		},
 		"name":{
-			"bsonType":"string"
-			},
-		"description":{
-			"bsonType":"string"
+			"title": "分类名称",
+			"bsonType": "string"
 		},
-		"url":{
-			"bsonType":"string"
+		"status":{
+			"title": "状态",
+			"bsonType": "bool",
+			"defaultValue":false
+		},		
+		"createTime":{
+			"title": "创建时间",
+			"bsonType": "timestamp",
+			"forceDefaultValue":{
+				"$env": "now"
+			}
 		}
 	}
 }

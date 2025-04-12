@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-	import { ref } from 'vue';
+	import { ref } from 'vue';  //创建响应式引用
 	
 	const EDayOfWeek = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
 	// const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
