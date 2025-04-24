@@ -22,6 +22,9 @@
 	<uni-icons class="icon-camera" type="camera-filled" size="25" color="white"></uni-icons>
 	<uni-icons class="plate-right" type="smallcircle-filled" size="60" color="white"></uni-icons>
 	<!-- camera-icon -->
+	<view class="button-goto-manage-page" @click="GotoManagePage">
+		<button size="mini" type="primary" class="transparent-button">"			"</button>
+	</view>
 	<!-- light-icon -->
 	<uni-icons class="icon-light" type="camera-filled" size="25" color="white"></uni-icons>
 	<uni-icons class="plate-left" type="smallcircle-filled" size="60" color="white"></uni-icons>
@@ -56,6 +59,19 @@ export default {
     }
   }
 };
+
+const GotoManagePage = ()=>{
+	uni.reLaunch({
+		url: '/pages/index/managePic', // 替换为你实际要跳转的页面路径
+		success: () => {
+		},
+		fail: (err) => {
+			console.error('页面跳转失败', err);
+		}
+	});
+}
+
+
 </script>
 
 <style lang="scss" scoped>
@@ -113,6 +129,19 @@ export default {
 	font-size: 42rpx;
 	top: 21.5vh;
 	right: 28+1.8vw;	
+}
+.button-goto-manage-page{
+	position: absolute;
+	display: grid;
+	place-items: center;
+	bottom: 15.8vh;
+	left: 16.4vw;
+	.transparent-button {
+	    background-color: transparent;
+	    border: none;
+	    z-index: 9999;
+	    position: relative;
+	}
 }
 .icon-camera{
 	position: absolute;
