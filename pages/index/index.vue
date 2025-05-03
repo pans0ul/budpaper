@@ -3,8 +3,20 @@
 <template>
   <view class="container">
 	<swiper circular >
-		<swiper-item v-for="item in 5">
+<!-- 		<swiper-item v-for="item in 5">
 			<image @tap="toggleImage" :src="currentImage" mode="aspectFill" ></image>
+		</swiper-item> -->
+<!-- 		<unicloud-db ref="udb" v-slot:default="{hasMore,data,pagination,loading,error,options}" collection="demo-wallpaper"
+		field="description,classid.name as classname,picurl.url as url,createTime">
+			<swiper-item v-for="item in data">
+				<image :src="item.url" mode="aspectFill" @click="printItemInfo(item)"></image>
+			</swiper-item>
+		</unicloud-db> -->
+<!-- 		<swiper-item v-for="item in listData" :key="item._id" @click="printItemInfo(item.picurl.url)">
+			<image :src="item.picurl.url" mode="aspectFill"></image>
+		</swiper-item> -->
+		<swiper-item v-for="item in listData" :key="item._id">
+			<image :src="item.picurl.url" mode="aspectFill"></image>
 		</swiper-item>
 	</swiper>
 <!-- 	<view class="miniTime">
@@ -33,15 +45,42 @@
 </template>
 
 <script setup>
-	import { ref } from 'vue';  //创建响应式引用
-	
-	const EDayOfWeek = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-	// const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-	const curDate = new Date();
-	const dayOfWeek = EDayOfWeek[curDate.getDay()];
-	console.log(dayOfWeek); 
+		
+import { ref } from 'vue';  //创建响应式引用
+const listData = ref([]);
+const db = uniCloud.database();
+const EDayOfWeek = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+// const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const curDate = new Date();
+const dayOfWeek = EDayOfWeek[curDate.getDay()];
+console.log(dayOfWeek); 
 
+
+const getData = async()=>{
+	console.log("获取数据");
+	// let {result:{data,errCode}} = await db.collection('demo-wallpaper').get();
+	let {result:{data,errCode}} = await db.collection('demo-wallpaper')
+	.field({
+		description:true,
+		picurl:true,
+		createTime:true
+		})
+	.orderBy('createTime','desc')
+	.get();
 	
+	// console.log(data);
+
+	if(errCode == 0)
+	{
+		listData.value = data;
+	}
+}
+
+const printItemInfo = (item) => {
+  console.log('当前 item 信息:', item);
+}
+getData();
+
 </script>
 
 <script>
@@ -60,6 +99,8 @@ export default {
   }
 };
 
+
+
 const GotoManagePage = ()=>{
 	uni.reLaunch({
 		url: '/pages/index/managePic', // 替换为你实际要跳转的页面路径
@@ -70,6 +111,7 @@ const GotoManagePage = ()=>{
 		}
 	});
 }
+
 
 
 </script>
