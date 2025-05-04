@@ -2,44 +2,40 @@
 <!-- 先做前端页面 -->
 <template>
   <view class="container">
-	<swiper circular >
+    <!-- 全屏置顶图片 -->
+    <view v-if="focusedImage" class="fullscreenMode" @tap="toggleFocus(focusedImage)">
+      <image class="fullscreen-img" :src="focusedImage" mode="aspectFit" ></image>
+    </view>
+	  
+	<swiper v-else circular>
 <!-- 		<swiper-item v-for="item in 5">
 			<image @tap="toggleImage" :src="currentImage" mode="aspectFill" ></image>
 		</swiper-item> -->
-<!-- 		<unicloud-db ref="udb" v-slot:default="{hasMore,data,pagination,loading,error,options}" collection="demo-wallpaper"
-		field="description,classid.name as classname,picurl.url as url,createTime">
-			<swiper-item v-for="item in data">
-				<image :src="item.url" mode="aspectFill" @click="printItemInfo(item)"></image>
-			</swiper-item>
-		</unicloud-db> -->
-<!-- 		<swiper-item v-for="item in listData" :key="item._id" @click="printItemInfo(item.picurl.url)">
-			<image :src="item.picurl.url" mode="aspectFill"></image>
-		</swiper-item> -->
 		<swiper-item v-for="item in listData" :key="item._id">
-			<image :src="item.picurl.url" mode="aspectFill"></image>
+			<image :src="item.picurl.url" mode="aspectFill" @tap="toggleFocus(item.picurl.url)"></image>
 		</swiper-item>
 	</swiper>
 <!-- 	<view class="miniTime">
 		<uni-dateformat :date="new Date()" format="hh:mm"></uni-dateformat>
 		</view> -->
 
-	<view class="time">
+	<view v-if="!focusedImage" class="time">
 		<uni-dateformat :date="new Date()" format="hh:mm"></uni-dateformat>
 	</view>
-	<view class="date">
+	<view v-if="!focusedImage" class="date">
 		<uni-dateformat :date="new Date()" format="M月dd日"></uni-dateformat>
 	</view>
-	<text class="dayOfWeek">{{dayOfWeek}}</text>
+	<text v-if="!focusedImage" class="dayOfWeek">{{dayOfWeek}}</text>
 	<!-- camera-icon -->
-	<uni-icons class="icon-camera" type="camera-filled" size="25" color="white"></uni-icons>
-	<uni-icons class="plate-right" type="smallcircle-filled" size="60" color="white"></uni-icons>
+	<uni-icons v-if="!focusedImage" class="icon-camera" type="camera-filled" size="25" color="white"></uni-icons>
+	<uni-icons v-if="!focusedImage" class="plate-right" type="smallcircle-filled" size="60" color="white"></uni-icons>
 	<!-- camera-icon -->
-	<view class="button-goto-manage-page" @click="GotoManagePage">
+	<view v-if="!focusedImage" class="button-goto-manage-page" @click="GotoManagePage">
 		<button size="mini" type="primary" class="transparent-button">"			"</button>
 	</view>
 	<!-- light-icon -->
-	<uni-icons class="icon-light" type="camera-filled" size="25" color="white"></uni-icons>
-	<uni-icons class="plate-left" type="smallcircle-filled" size="60" color="white"></uni-icons>
+	<uni-icons v-if="!focusedImage" class="icon-light" type="camera-filled" size="25" color="white"></uni-icons>
+	<uni-icons v-if="!focusedImage" class="plate-left" type="smallcircle-filled" size="60" color="white"></uni-icons>
 	<!-- light-icon -->
   </view>
 </template>
@@ -48,6 +44,7 @@
 		
 import { ref } from 'vue';  //创建响应式引用
 const listData = ref([]);
+const focusedImage = ref(null);
 const db = uniCloud.database();
 const EDayOfWeek = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
 // const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -55,6 +52,9 @@ const curDate = new Date();
 const dayOfWeek = EDayOfWeek[curDate.getDay()];
 console.log(dayOfWeek); 
 
+const toggleFocus = (img) => {
+  focusedImage.value = (focusedImage.value === img) ? null : img;
+};
 
 const getData = async()=>{
 	console.log("获取数据");
@@ -85,21 +85,8 @@ getData();
 
 <script>
 export default {
-  data() {
-    return {
-      originalImage: '/static/original.jpg', // 第一张图片
-      clickedImage: '/static/clicked.jpg', // 第二张图片
-      currentImage: '/static/original.jpg' // 初始图片
-    };
-  },
-  methods: {
-    toggleImage() {
-      this.currentImage = this.currentImage === this.originalImage ? this.clickedImage : this.originalImage;
-    }
-  }
+
 };
-
-
 
 const GotoManagePage = ()=>{
 	uni.reLaunch({
@@ -112,11 +99,31 @@ const GotoManagePage = ()=>{
 	});
 }
 
-
-
 </script>
 
 <style lang="scss" scoped>
+.fullscreenMode {
+  // position: fixed;
+  // top: 0;
+  // left: 0;
+  // z-index: 9999;
+  // width: 100%;
+  // height: 100%;
+  // background: black;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+	.fullscreen-img {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+		background-color: black;
+		max-width: 100%;
+		max-height: 100%;
+	}
+}
+
 .container {
   display: flex;
   justify-content: center;
