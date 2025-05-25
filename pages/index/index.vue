@@ -8,6 +8,7 @@
 		</swiper-item> -->
 		<swiper-item v-for="item,index in listData" :key="item._id">
 			<image :src="item.picurl.url" mode="aspectFill" @tap="toggleChangeMode()"></image>
+			<text v-if="!wallpaperMode" class="description">{{item.description}}</text>
 		</swiper-item>
 	</swiper>
 
@@ -41,6 +42,7 @@ import { ref } from 'vue';  //创建响应式引用
 const listData = ref([]);
 const previewImg = ref(null);
 const wallpaperMode = ref();
+
 const db = uniCloud.database();
 const EDayOfWeek = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
 // const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -64,8 +66,7 @@ const getData = async()=>{
 	.orderBy('createTime','desc')
 	.get();
 	
-	// console.log(data);
-
+	//console("print data",data);
 	if(errCode == 0)
 	{
 		listData.value = data;
@@ -125,6 +126,16 @@ const GotoManagePage = ()=>{
 		width: 100%;
 		height: 100%;
 		}
+.description
+{
+	position: absolute;
+	color: white;
+	font-size: 35rpx;
+	text-shadow: 0 1rpx rgba(0, 0, 0, 0.3);
+	top: 50px;
+	left: 20px;
+	right: 20px;
+}
 	}
 }
 // .miniTime{		
