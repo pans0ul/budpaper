@@ -113,6 +113,11 @@ const GotoManagePage = ()=>{
 	}
 }
 
+@font-face {
+  font-family: 'GuTiFangSong';
+  src: url('@/static/fonts/WenYue_GuTiFangSong_F.otf');
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -126,15 +131,24 @@ const GotoManagePage = ()=>{
 		width: 100%;
 		height: 100%;
 		}
+
 .description
 {
 	position: absolute;
 	color: white;
-	font-size: 35rpx;
+	font-size: 44rpx;
+	font-family: 'GuTiFangSong';
 	text-shadow: 0 1rpx rgba(0, 0, 0, 0.3);
-	top: 50px;
+	bottom: 50px;
 	left: 20px;
-	right: 20px;
+	// right: 20px;
+	// padding: 0 20rpx;
+	// border-radius: 10rpx;
+	// border: 1rpx solid rgba(255, 255, 255, 0.3);	
+	// background-color: transparent;
+	writing-mode: vertical-rl;
+	// text-orientation: upright;
+	// line-height: 40rpx;
 }
 	}
 }

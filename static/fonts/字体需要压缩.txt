@@ -1,0 +1,1 @@
+pyftsubset YourFont.ttf --text="小程序字体压缩" --output-file=YourFont.subset.ttf
