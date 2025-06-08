@@ -164,10 +164,12 @@ getData();
 	padding:30rpx;
 	.add{
 		margin-bottom:30rpx;
+		margin-top:120rpx;
 		display: inline - block; /* 设置为行内块元素 */
-		margin-right: 59vw; /* 给“添加”按钮右侧加间距，让两个按钮分开，可按需调整 */
+		margin-right: 2vw; /* 给“添加”按钮右侧加间距，让两个按钮分开，可按需调整 */
 	}
 	.back{
+		margin-top:120rpx;
 		margin-bottom:30rpx;
 		display: inline - block; /* 设置为行内块元素 */
 	}

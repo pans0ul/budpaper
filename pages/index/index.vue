@@ -7,7 +7,7 @@
 			<image @tap="toggleImage" :src="currentImage" mode="aspectFill" ></image>
 		</swiper-item> -->
 		<swiper-item v-for="item,index in listData" :key="item._id">
-			<image :src="item.picurl.url" mode="aspectFill" @tap="toggleChangeMode()"></image>
+			<image :src="item.picurl.url" mode="aspectFill" @tap="toggleChangeMode()" @longpress="download(item.picurl.url)"></image>
 			<text v-if="!wallpaperMode" class="description">{{item.description}}</text>
 		</swiper-item>
 	</swiper>
@@ -53,6 +53,52 @@ console.log(dayOfWeek);
 const toggleChangeMode = (img) => {
   wallpaperMode.value = (wallpaperMode.value === true) ? false : true;
 };
+
+const download = async (imgurl) => {
+  try {
+    // 权限检查
+    const authRes = await uni.getSetting();
+    if (!authRes.authSetting['scope.writePhotosAlbum']) {
+      try {
+        await uni.authorize({ scope: 'scope.writePhotosAlbum' });
+      } catch (e) {
+        await uni.showModal({
+          title: '提示',
+          content: '请前往设置开启保存图片权限',
+          success: (res) => {
+            if (res.confirm) uni.openSetting();
+          }
+        });
+        return;
+      }
+    }
+
+    uni.showLoading({ title: '保存中...' });
+
+    // 下载文件
+    const downloadRes = await uni.downloadFile({ url: imgurl });
+    if (downloadRes.statusCode === 200 && downloadRes.tempFilePath) {
+      await uni.saveImageToPhotosAlbum({
+        filePath: downloadRes.tempFilePath
+      });
+      uni.showToast({
+        title: '保存成功',
+        icon: 'none'
+      });
+    } else {
+      throw new Error('下载失败');
+    }
+  } catch (err) {
+    console.error('保存失败:', err);
+    uni.showToast({
+      title: '保存失败',
+      icon: 'none'
+    });
+  } finally {
+    uni.hideLoading();
+  }
+};
+
 
 const getData = async()=>{
 	console.log("获取数据");
@@ -138,8 +184,9 @@ const GotoManagePage = ()=>{
 	color: white;
 	font-size: 44rpx;
 	font-family: 'GuTiFangSong';
-	text-shadow: 0 1rpx rgba(0, 0, 0, 0.3);
-	bottom: 50px;
+	text-shadow: 0 6rpx rgba(0, 0, 0, 0.3);
+	top: 120px;
+	bottom: 80px;
 	left: 20px;
 	// right: 20px;
 	// padding: 0 20rpx;
