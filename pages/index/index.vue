@@ -50,6 +50,17 @@ const curDate = new Date();
 const dayOfWeek = EDayOfWeek[curDate.getDay()];
 console.log(dayOfWeek); 
 
+uni.loadFontFace({
+  family: 'gutifangsong',
+  source: 'url("https://mp-45be7326-2629-4d05-ae43-15707ed3f53a.cdn.bspapp.com/WenYue_GuTiFangSong_F.subset.otf")',
+  success() {
+    console.log('字体加载成功');
+  },
+  fail(err) {
+    console.error('字体加载失败', err);
+  }
+});
+
 const toggleChangeMode = (img) => {
   wallpaperMode.value = (wallpaperMode.value === true) ? false : true;
 };
@@ -159,11 +170,6 @@ const GotoManagePage = ()=>{
 	}
 }
 
-@font-face {
-  font-family: 'GuTiFangSong';
-  src: url('@/static/fonts/WenYue_GuTiFangSong_F.otf');
-}
-
 .container {
   display: flex;
   justify-content: center;
@@ -181,20 +187,21 @@ const GotoManagePage = ()=>{
 .description
 {
 	position: absolute;
-	color: white;
-	font-size: 44rpx;
-	font-family: 'GuTiFangSong';
+	color: snow;
+	font-size: 42rpx;
+	font-family: 'gutifangsong';
 	text-shadow: 0 6rpx rgba(0, 0, 0, 0.3);
 	top: 120px;
-	bottom: 80px;
+	bottom: 60px;
 	left: 20px;
+	line-height: 1.2;
 	// right: 20px;
 	// padding: 0 20rpx;
 	// border-radius: 10rpx;
 	// border: 1rpx solid rgba(255, 255, 255, 0.3);	
 	// background-color: transparent;
 	writing-mode: vertical-rl;
-	// text-orientation: upright;
+	text-orientation: upright;
 	// line-height: 40rpx;
 }
 	}
@@ -237,7 +244,8 @@ const GotoManagePage = ()=>{
 	place-items: center;
 	font-size: 42rpx;
 	top: 21.5vh;
-	right: 28+1.8vw;	
+	right: 28+1.8vw;
+	text-shadow: 0 2rpx rgba(0, 0, 0, 0.3);
 }
 .button-goto-manage-page{
 	position: absolute;
@@ -250,6 +258,7 @@ const GotoManagePage = ()=>{
 	    border: none;
 	    z-index: 9999;
 	    position: relative;
+		opacity: 0;
 	}
 }
 .icon-camera{
