@@ -7,11 +7,20 @@
 			<image @tap="toggleImage" :src="currentImage" mode="aspectFill" ></image>
 		</swiper-item> -->
 		<swiper-item v-for="item,index in listData" :key="item._id">
-			<image :src="item.picurl.url" mode="aspectFill" @tap="toggleChangeMode()" @longpress="download(item.picurl.url)"></image>
+			<image :src="item.picurl.url" mode="aspectFill" @tap="toggleChangeMode" @touchstart="onTouchStart"
+			@longpress="showSaveButton(item.picurl.url)"></image>
 			<text v-if="!wallpaperMode" class="description">{{item.description}}</text>
 		</swiper-item>
 	</swiper>
 
+  <view
+    v-if="showSave"
+    class="save-float-button"
+    :style="{ top: saveBtnY + 'px', left: saveBtnX + 'px' }"
+    @click="download(currentImageUrl)"
+  >
+    长按保存
+  </view>
 <!-- 	<view class="miniTime">
 		<uni-dateformat :date="new Date()" format="hh:mm"></uni-dateformat>
 		</view> -->
@@ -40,9 +49,11 @@
 		
 import { ref } from 'vue';  //创建响应式引用
 const listData = ref([]);
-const previewImg = ref(null);
+const currentImageUrl = ref();
 const wallpaperMode = ref();
-
+const showSave = ref();
+const saveBtnX = ref();
+const saveBtnY = ref();
 const db = uniCloud.database();
 const EDayOfWeek = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
 // const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -61,11 +72,34 @@ uni.loadFontFace({
   }
 });
 
-const toggleChangeMode = (img) => {
-  wallpaperMode.value = (wallpaperMode.value === true) ? false : true;
+let timeoutId = null;
+
+const toggleChangeMode = () =>{
+  wallpaperMode.value = !wallpaperMode.value;
 };
 
+const onTouchStart = (e) => {
+      const touch = e.touches[0];
+      saveBtnX.value = touch.clientX;
+      saveBtnY.value = touch.clientY;
+    }
+
+
+const showSaveButton = (imgurl) => {
+      currentImageUrl.value = imgurl;
+      showSave.value = true;
+	  
+  if (timeoutId) clearTimeout(timeoutId);
+
+      //自动隐藏
+      timeoutId = setTimeout(() => {
+        showSave.value = false;
+		timeoutId = null;
+      }, 1500);
+    }
+
 const download = async (imgurl) => {
+	showSave.value = false; // 隐藏按钮
   try {
     // 权限检查
     const authRes = await uni.getSetting();
@@ -183,28 +217,45 @@ const GotoManagePage = ()=>{
 		width: 100%;
 		height: 100%;
 		}
-
-.description
-{
-	position: absolute;
-	color: snow;
-	font-size: 42rpx;
-	font-family: 'gutifangsong';
-	text-shadow: 0 6rpx rgba(0, 0, 0, 0.3);
-	top: 120px;
-	bottom: 60px;
-	left: 20px;
-	line-height: 1.2;
-	// right: 20px;
-	// padding: 0 20rpx;
-	// border-radius: 10rpx;
-	// border: 1rpx solid rgba(255, 255, 255, 0.3);	
-	// background-color: transparent;
-	writing-mode: vertical-rl;
-	text-orientation: upright;
-	// line-height: 40rpx;
-}
+		
+		.description
+		{
+			position: absolute;
+			color: snow;
+			font-size: 42rpx;
+			font-family: 'gutifangsong';
+			text-shadow: 0 6rpx rgba(0, 0, 0, 0.3);
+			top: 120px;
+			bottom: 60px;
+			left: 20px;
+			line-height: 1.2;
+			// right: 20px;
+			// padding: 0 20rpx;
+			// border-radius: 10rpx;
+			// border: 1rpx solid rgba(255, 255, 255, 0.3);	
+			// background-color: transparent;
+			writing-mode: vertical-rl;
+			text-orientation: upright;
+			// line-height: 40rpx;
+		}
 	}
+}
+
+.save-float-button {
+  position: fixed;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 16rpx 32rpx;
+  border-radius: 16rpx;
+  font-size: 28rpx;
+}
+.save-button {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 28rpx;
+  padding: 20rpx 40rpx;
+  border-radius: 16rpx;
 }
 // .miniTime{		
 // 	position: absolute;  //TODO: relative to image
@@ -301,6 +352,16 @@ const GotoManagePage = ()=>{
 	top: 100px;
 	left: 100px;
 	
+}
+
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 28rpx;
+  opacity: 0.8;
 }
 </style>
 
