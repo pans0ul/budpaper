@@ -12,13 +12,17 @@
 
 # 项目相关介绍
 
-<img title="" src="./doc/assets_README/2025-06-22-20-39-35-dbaa15a986cba917c9a5686da2601c8.png" alt="" width="237"><img title="" src="file:///D:/Users/pans0ul/Documents/HBuilderProjects/BudPaper/doc/assets_README/2025-06-22-20-40-46-2165a11c08908e8575bb51789315e5e.jpg" alt="" width="237"><img title="" src="file:///D:/Users/pans0ul/Documents/HBuilderProjects/BudPaper/doc/assets_README/2025-06-22-20-41-22-ee1a8c39b7861bfc54453b1e4477efb.jpg" alt="" width="236"><img title="" src="file:///D:/Users/pans0ul/Documents/HBuilderProjects/BudPaper/doc/assets_README/2025-06-22-20-41-38-c9a4937fcd60b1a8af1d93a24167692.jpg" alt="" width="236">
+<img title="" src="./doc/assets_README/2025-06-22-20-39-35-dbaa15a986cba917c9a5686da2601c8.png" alt="" width="237">
+<img title="" src="./doc/assets_README/2025-06-22-20-40-46-2165a11c08908e8575bb51789315e5e.jpg" alt="" width="237">
+<img title="" src="./doc/assets_README/2025-06-22-20-41-22-ee1a8c39b7861bfc54453b1e4477efb.jpg" alt="" width="236">
+<img title="" src="./doc/assets_README/2025-06-22-20-41-38-c9a4937fcd60b1a8af1d93a24167692.jpg" alt="" width="236">
 
 
 
 预览页面                                        管理页面
 
-<img title="" src="file:///D:/Users/pans0ul/Documents/HBuilderProjects/BudPaper/doc/assets_README/2025-06-22-20-42-09-4dd8895bf83b1a59d5ae87702fe91a9.jpg" alt="" width="237"><img title="" src="file:///D:/Users/pans0ul/Documents/HBuilderProjects/BudPaper/doc/assets_README/2025-06-22-20-43-09-96611cec97ad398c6fe1707b5622a64.jpg" alt="" width="237">
+<img title="" src="./doc/assets_README/2025-06-22-20-42-09-4dd8895bf83b1a59d5ae87702fe91a9.jpg" alt="" width="237">
+<img title="" src="./doc/assets_README/2025-06-22-20-43-09-96611cec97ad398c6fe1707b5622a64.jpg" alt="" width="237">
 
 
 
@@ -36,7 +40,7 @@
 
 注意：管理页面进入入口
 
-<img title="" src="file:///D:/Users/pans0ul/Documents/HBuilderProjects/BudPaper/doc/assets_README/2025-06-22-20-44-35-image.png" alt="" width="150">
+<img title="" src="./doc/assets_README/2025-06-22-20-44-35-image.png" alt="" width="150">
 
 # 部署方法
 
@@ -56,7 +60,7 @@ pans0ul@163.com
 
 （微信随缘乐助）
 
-<img title="" src="file:///D:/Users/pans0ul/Desktop/2025-06-22-20-36-14-image.png" alt="" width="221" data-align="inline">
+<img title="" src="./doc/assets_README/2025-06-22-20-36-14-image.png" alt="" width="221" data-align="inline">
 
 
 
